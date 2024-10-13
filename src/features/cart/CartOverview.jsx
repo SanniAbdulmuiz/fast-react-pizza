@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function CartOverview() {
   return (
-    <div>
+    <div className="md:text-base">
       <p>
         <span>23 pizzas</span>
         <span>$23.45</span>
