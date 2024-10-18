@@ -22,7 +22,7 @@ export async function createOrder(newOrder) {
   try {
     const res = await fetch(`${API_URL}/order`, {
       method: "POST",
-      body: JSON.stringify(newOrder), //Converting to strings
+      body: JSON.stringify(newOrder),
       headers: {
         "Content-Type": "application/json",
       },
