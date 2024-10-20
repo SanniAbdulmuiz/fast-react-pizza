@@ -1,17 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit"
-import reducer from "../user/userSlice"
 
 const initialState = {
-    //cart: []
+    cart: []
 
-    cart: [
-        {pizzaId: 12,
-        name: 'mediterrean',
-    quantity: 2,
-unitPrice: 16, totalPrice: 32,
-},
-
-    ],
+//     cart: [{
+//         pizzaId: 12,
+//         name: 'mediterrean',
+//         quantity: 2,
+//         unitPrice: 16, 
+//         totalPrice: 32,
+// },],
 }
 
 const cartSlice  = createSlice({
@@ -39,13 +37,27 @@ const cartSlice  = createSlice({
 
           item.quantity--
           item.totalPrice = item.quantity * item.unitPrice
+
+          if(item.quantity === 0) cartSlice.caseReducers.deleteItem(state, action) //Reusing the deleteItem
         },
-       clearState(state){
+       clearCart(state){
         state.cart = [];
        },
     },
 })
 
-export const {addItem, deleteItem, increaseItemQuantity, decreaseItemQuantity, clearCart} = cartSlice.actions
+export const {addItem, deleteItem, increaseItemQuantity, 
+  decreaseItemQuantity, clearCart} = cartSlice.actions
 
 export default cartSlice.reducer
+
+export const getCart = state => state.cart.cart
+
+export const getCurrentQuantityById = id => state => state.cart.cart.
+find( item => item.pizzaId === id)?.quantity ?? 0
+
+export const getTotalCartQuantity = (state) => state.cart.cart.
+reduce((sum, item) => sum + item.quantity, 0)
+
+export const getTotalCartprice = (state) => state.cart.cart.
+reduce((sum, item) => sum + item.totalPrice, 0)
